@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import * as THREE from 'three';
+import * as THREE from "three";
 import { extractUVMap } from "../../helpers/loadModel";
 
 const ModelViewer = () => {
@@ -52,17 +52,17 @@ const ModelViewer = () => {
     reader.onload = () => {
       const img = new Image();
       img.src = reader.result;
-  
+
       img.onload = () => {
         // Create a canvas element
-        const canvas = document.createElement('canvas');
+        const canvas = document.createElement("canvas");
         canvas.width = img.width;
         canvas.height = img.height;
-  
+
         // Draw the image onto the canvas
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0);
-  
+
         // Update the textureCanvas state
         setTextureCanvas(canvas);
         setUploadedImage(reader.result);
@@ -70,7 +70,6 @@ const ModelViewer = () => {
     };
     reader.readAsDataURL(file);
   };
-  
 
   const handleMouseMove = (event) => {
     if (uvMapContainerRef.current && uploadedImage) {
@@ -108,55 +107,68 @@ const ModelViewer = () => {
         if (child.isMesh) {
           // Apply the texture to the mesh
           child.material.map = texture;
-  
+
           // Set texture offset and scale based on image position
           texture.offset.set(imagePosition.x, imagePosition.y);
           texture.repeat.set(1, 1); // Adjust if necessary
-  
+
           child.material.needsUpdate = true;
         }
       });
     }
   };
-  
 
   return (
-    <div className="viewer-container">
-      <Canvas>
-        <ambientLight />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
-        {model && <primitive ref={modelRef} object={model} />}
-        <OrbitControls />
-      </Canvas>
+    <div>
+      <div className="viewer-container">
+        <Canvas className="modelCanvas">
+          <ambientLight />
+          <directionalLight position={[10, 10, 5]} intensity={1} />
+          {model && <primitive ref={modelRef} object={model} />}
+          <OrbitControls />
+        </Canvas>
 
-      <button onClick={loadModelManually}>Load Model</button>
-
-      <div
-        className="uv-map"
-        ref={uvMapContainerRef}
-        style={{ position: 'relative', width: '500px', height: '500px', border: '1px solid black' }}
-        onMouseMove={handleMouseMove}
-      >
-        {uvMap && <img src={uvMap} alt="UV Map" style={{ width: '100%', height: '100%' }} />}
-        {uploadedImage && (
-          <img
-            src={uploadedImage}
-            alt="Uploaded"
-            style={{
-              position: 'absolute',
-              top: `${imagePosition.y * 100}%`,
-              left: `${imagePosition.x * 100}%`,
-              width: '100px', // Adjust size as needed
-              height: '100px', // Adjust size as needed
-              transform: 'translate(-50%, -50%)',
-              cursor: 'move',
-            }}
-            draggable
-            onDrag={handleImageDrag}
-          />
-        )}
-        <input type="file" accept="image/*" onChange={handleImageUpload} />
+        <div
+          className="uv-map"
+          ref={uvMapContainerRef}
+          style={{
+            position: "relative",
+            width: "500px",
+            height: "500px",
+            border: "1px solid black",
+          }}
+          onMouseMove={handleMouseMove}
+        >
+          {uvMap && (
+            <img
+              src={uvMap}
+              alt="UV Map"
+              style={{ width: "100%", height: "100%" }}
+            />
+          )}
+          {uploadedImage && (
+            <img
+              src={uploadedImage}
+              alt="Uploaded"
+              style={{
+                position: "absolute",
+                top: `${imagePosition.y * 100}%`,
+                left: `${imagePosition.x * 100}%`,
+                width: "100px", // Adjust size as needed
+                height: "100px", // Adjust size as needed
+                transform: "translate(-50%, -50%)",
+                cursor: "move",
+              }}
+              draggable
+              onDrag={handleImageDrag}
+            />
+          )}
+          <input type="file" accept="image/*" onChange={handleImageUpload} />
+        </div>
       </div>
+      <button onClick={loadModelManually} className="loadBtn">
+        Load Model
+      </button>
     </div>
   );
 };

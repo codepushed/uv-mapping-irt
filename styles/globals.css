@@ -17,3 +17,26 @@
   width: 100%;
   height: 100%;
 }
+
+
+.loadBtn {
+  border: none;
+  outline: none;
+  border-radius: 50px;
+  padding: 5px 15px;
+  cursor: pointer;
+  font-weight: 700;
+ margin-top: 10px;
+}
+
+.modelCanvas {
+  width: 50%;
+  background-color: grey;
+}
+
+.viewer-container {
+  height: 500px;
+  width: 100%; 
+  display: flex;
+  gap: 10px;
+}
