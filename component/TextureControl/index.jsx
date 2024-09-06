@@ -15,12 +15,12 @@ const TextureControl = () => {
 
     return (
         <div style={{ display: 'flex' }}>
-            <div style={{ width: '50%' }}>
+            <div style={{ width: '80%' }}>
                 <ModelViewer texture={texture} />
             </div>
             <div style={{ width: '50%' }}>
-                <UvMapCanvas model={model} />
-                <ImageUploader onImageUpload={handleImageUpload} />
+                {/* <UvMapCanvas model={model} /> */}
+                {/* <ImageUploader onImageUpload={handleImageUpload} /> */}
             </div>
         </div>
     );

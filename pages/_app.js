@@ -1,11 +1,12 @@
 import React from 'react';
+import "../styles/globals.css"
 
-import TextureControl from '../component/TextureControl';
+import ModelRenderer from '../component/ModelRenderer';
 
 function App() {
     return (
         <div className="App">
-            <TextureControl />
+           <ModelRenderer />
         </div>
     );
 }
