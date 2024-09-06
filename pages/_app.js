@@ -1,7 +1,13 @@
-import React from "react";
+import React from 'react';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+import TextureControl from '../component/TextureControl';
+
+function App() {
+    return (
+        <div className="App">
+            <TextureControl />
+        </div>
+    );
 }
 
-export default MyApp;
+export default App;

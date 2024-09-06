@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@google/model-viewer": "^3.5.0",
+    "@react-three/drei": "^9.112.0",
+    "@react-three/fiber": "^8.17.6",
     "next": "14.2.5",
     "react": "^18",
+    "react-advanced-cropper": "^0.20.0",
     "react-dom": "^18",
     "react-resizable": "^3.0.5",
     "three": "^0.167.1"
